@@ -4,25 +4,46 @@
 
 <main>
   <section class="mb-10 mt-10">
-    <div class="flex flex-wrap p-2 gap-3 md:flex-row md:items-center md:pl-10">
+    <form class="flex flex-col items-center flex-wrap p-2 gap-3 md:flex-row  md:pl-10 m-auto" (submit)="addTask()">
       <input
         type="text"
-        class="border max-w-sm h-12 px-4 py-2 text-2xl text-teal-600 outline-0 shadow hover:shadow-lg md:flex-1"
+        class="border max-w-md w-full h-12 px-4 py-2 text-2xl text-teal-600 outline-0 shadow hover:shadow-lg md:flex-1"
         placeholder="new task"
         [formControl]="task"
       >
-      <button class="border w-80 h-12 bg-purple-600 hover:bg-purple-700 active:bg-purple-900 text-lg text-yellow-300 font-medium rounded-md md:w-48">
+      <button
+        class="border max-w-md w-full h-12 bg-purple-600 hover:bg-purple-700 active:bg-purple-900 text-lg text-yellow-300 font-medium         rounded-md md:w-48"
+        type="submit"
+      >
         Add task
       </button>
       <p class="hidden text-3xl text-sky-900 border-b h-12 px-2 uppercase md:block ">{{showTask}}</p>
-    </div>
+    </form>
   </section>
 
   <section class=" h-auto max-w-lg m-auto flex flex-col items-center md:max-w-none md:flex-row justify-around">
 
     <section class="border mb-4 w-11/12 md:w-44 lg:w-80">
       <h2 class="p-2 text-xl font-medium text-yellow-300 bg-pink-500">Task list</h2>
-      <div class=" h-60 lg:h-96 bg-white"></div>
+      <div class=" h-60 lg:h-96 bg-white p-2 overflow-scroll">
+        <!-- <ul>
+          <li
+            class="p-2  mt-2 bg-gray-100"
+            *ngFor="let item of listTask"
+          >
+            <article class="w-full flex items-center justify-between ">
+              <img class="h-6 w-6" src="./../assets/twotone_description_black_24dp.png" alt="note">
+              <div>
+                <p class="text-teal-600 font-medium">{{item.title}}</p>
+                <p class="text-sm text-red-400">{{item.date | date:'medium'}}</p>
+              </div>
+              <img class="h-6 w-6 justify-self-end" src="./../assets/twotone_delete_black_24dp.png" alt="delete">
+            </article>
+          </li>
+        </ul> -->
+
+        <app-list-card [taskList]="listTask"></app-list-card>
+      </div>
     </section>
 
     <section class="border mb-4 w-11/12 md:w-44 lg:w-80 " >
