@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
       }
 
       this.taskService.addTask(task);
+      this.task.setValue('');
       console.log(task);
     }
     else {
@@ -59,6 +60,27 @@ export class AppComponent implements OnInit {
     return this.task.invalid && this.task.touched;
   }
 
+  //se ejecuta cuando se suelta un elemento --evento drop
+  dropHandler(e:DragEvent){
+    e.preventDefault();
+    let data = e.dataTransfer?.getData('text/plain')!;
+    let zone = e.target as HTMLElement;
+    // zone.textContent  = data;
+    console.log(JSON.parse(data));
+  }
+
+  //se ejecuta cuando se esta sobre la zona drog --event dragover
+  dragOverHandler(e:DragEvent) {
+    e.preventDefault();
+  }
+
+  //se ejecuta al entrar el elemento arrastrado sobre la zona de caida del objeto
+  dragEnterHandler(e:DragEvent) {
+    e.preventDefault();
+    if(e.dataTransfer){
+      e.dataTransfer.dropEffect = "move";
+    }
+  }
 
 }
 
