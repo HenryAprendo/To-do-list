@@ -15,6 +15,12 @@ export class AppComponent implements OnInit {
 
   listTask: Task[] = [];
 
+  proccessTask: Task[] = [];
+
+  pendingTask: Task[] = [];
+
+  finalizeTask: Task[] = [];
+
   task = new FormControl('',[Validators.required, Validators.maxLength(28)]);
 
   showTask:string = '';
@@ -45,7 +51,7 @@ export class AppComponent implements OnInit {
 
       this.taskService.addTask(task);
       this.task.setValue('');
-      console.log(task);
+
     }
     else {
       this.task.markAllAsTouched;
@@ -64,9 +70,30 @@ export class AppComponent implements OnInit {
   dropHandler(e:DragEvent){
     e.preventDefault();
     let data = e.dataTransfer?.getData('text/plain')!;
-    let zone = e.target as HTMLElement;
-    // zone.textContent  = data;
-    console.log(JSON.parse(data));
+    let task = JSON.parse(data)
+    let area = e.target as HTMLElement;
+    let nameArea = area.dataset['zone'];
+
+    switch(nameArea){
+
+      case "list" :
+        this.listTask.push(task);
+        break;
+
+      case "proccess":
+        this.proccessTask.push(task);
+        break;
+
+      case "pending":
+        this.pendingTask.push(task);
+        break;
+
+      case "finalize":
+        this.finalizeTask.push(task);
+        break;
+
+    }
+
   }
 
   //se ejecuta cuando se esta sobre la zona drog --event dragover
