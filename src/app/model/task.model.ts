@@ -1,4 +1,4 @@
-type Status = 'process' | 'pending' |'finalize' | 'initial' ;
+export type Status = 'process' | 'pending' |'finalize' | 'initial' ;
 
 export interface Task {
   id: string,

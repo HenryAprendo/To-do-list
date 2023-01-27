@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validator, Validators } from '@angular/forms';
+import { Component, OnInit, Renderer2 } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Task } from './model/task.model';
 import { TaskService } from './services/task.service';
 
@@ -25,14 +25,28 @@ export class AppComponent implements OnInit {
 
   showTask:string = '';
 
-  constructor(private taskService: TaskService){ }
+  constructor(
+    private taskService: TaskService,
+    private render: Renderer2
+  ){ }
 
   ngOnInit(){
 
-    this.taskService.getAllTask()
-      .subscribe( data => {
-        this.listTask = data;
-      });
+    this.taskService.taskNotify.subscribe( data => {
+      this.listTask = data;
+    });
+
+    this.taskService.proccessNotify.subscribe( data => {
+      this.proccessTask = data;
+    });
+
+    this.taskService.pendingNotify.subscribe( data => {
+      this.pendingTask = data;
+    });
+
+    this.taskService.finalizeNotify.subscribe( data => {
+      this.finalizeTask = data;
+    });
 
     this.task.valueChanges.subscribe( value => {
       value ? this.showTask = value : this.showTask = '';
@@ -70,26 +84,32 @@ export class AppComponent implements OnInit {
   dropHandler(e:DragEvent){
     e.preventDefault();
     let data = e.dataTransfer?.getData('text/plain')!;
-    let task = JSON.parse(data)
+    let task:Task = JSON.parse(data)
     let area = e.target as HTMLElement;
     let nameArea = area.dataset['zone'];
+
+    this.taskService.deleteTask(task);
 
     switch(nameArea){
 
       case "list" :
-        this.listTask.push(task);
+        task.state = 'initial';
+        this.taskService.addTask(task);
         break;
 
       case "proccess":
-        this.proccessTask.push(task);
+        task.state = 'process';
+        this.taskService.addTask(task);
         break;
 
       case "pending":
-        this.pendingTask.push(task);
+        task.state = 'pending';
+        this.taskService.addTask(task);
         break;
 
       case "finalize":
-        this.finalizeTask.push(task);
+        task.state = 'finalize';
+        this.taskService.addTask(task);
         break;
 
     }
@@ -107,6 +127,14 @@ export class AppComponent implements OnInit {
     if(e.dataTransfer){
       e.dataTransfer.dropEffect = "move";
     }
+
+    const el = e.target as HTMLElement;
+    // this.render.addClass(el,'border-red-400');
+    // this.render.addClass(el,'border-2');
+  }
+
+  dragleaveHandler(){
+    // console.log('leave');
   }
 
 }
