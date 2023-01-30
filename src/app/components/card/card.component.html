@@ -1,5 +1,5 @@
 
-<li class="p-2 mt-2 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer"
+<li class="p-2 mb-4 bg-gray-100 hover:bg-gray-200 hover:cursor-pointer rounded-md shadow-md"
   draggable="true"
   (dragstart)="dragStartHandler($event)"
   (dragend)="dragEndHandler($event)"
@@ -7,7 +7,7 @@
   <article class="flex items-center justify-between">
     <img class="h-6 w-6" src="./../assets/twotone_description_black_24dp.png" alt="note">
     <div>
-      <p class="text-teal-600 font-medium">{{task.title}}</p>
+      <p class="text-teal-600 font-medium first-letter:uppercase">{{task.title}}</p>
       <p class="text-sm text-red-400">{{task.date | date:'medium'}}</p>
     </div>
     <img class="h-6 w-6" src="./../assets/twotone_delete_black_24dp.png" alt="delete">
