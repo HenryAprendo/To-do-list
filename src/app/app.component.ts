@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
   task = new FormControl('',[Validators.required, Validators.maxLength(28)]);
 
   showTask:string = '';
+  zone:string = '';
 
   constructor(
     private taskService: TaskService,
@@ -84,11 +85,12 @@ export class AppComponent implements OnInit {
   dropHandler(e:DragEvent){
     e.preventDefault();
     let data = e.dataTransfer?.getData('text/plain')!;
-    let task:Task = JSON.parse(data)
-    let area = e.target as HTMLElement;
-    let nameArea = area.dataset['zone'];
+    let task:Task = JSON.parse(data);
+    let nameArea = this.zone;
 
-    this.taskService.deleteTask(task);
+    if(nameArea !== undefined){
+      this.taskService.deleteTask(task);
+    }
 
     switch(nameArea){
 
@@ -112,7 +114,7 @@ export class AppComponent implements OnInit {
         this.taskService.addTask(task);
         break;
 
-    }
+    };
 
   }
 
@@ -129,11 +131,15 @@ export class AppComponent implements OnInit {
     }
 
     const el = e.target as HTMLElement;
-    // this.render.addClass(el,'border-red-400');
-    // this.render.addClass(el,'border-2');
+    console.log(e);
+
+    if(el.localName === 'div' && el.dataset['zone']){
+      this.zone = el.dataset['zone'];
+    }
+
   }
 
-  dragleaveHandler(){
+  dragleaveHandler(e:DragEvent){
     // console.log('leave');
   }
 

@@ -18,8 +18,7 @@ export class CardComponent {
   }
 
   dragEndHandler(e:DragEvent){
-    let element = e.target as HTMLElement;
-    // element.remove();
+
   }
 
 }

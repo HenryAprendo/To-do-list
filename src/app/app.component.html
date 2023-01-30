@@ -31,7 +31,7 @@
           (drop)="dropHandler($event)"
           (dragover)="dragOverHandler($event)"
           (dragenter)="dragEnterHandler($event)"
-          (dragleave)="dragleaveHandler()"
+          (dragleave)="dragleaveHandler($event)"
         >
         <app-list-card [taskList]="listTask"></app-list-card>
       </div>
@@ -45,7 +45,7 @@
         (drop)="dropHandler($event)"
         (dragover)="dragOverHandler($event)"
         (dragenter)="dragEnterHandler($event)"
-        (dragleave)="dragleaveHandler()"
+        (dragleave)="dragleaveHandler($event)"
       >
       <app-list-card [taskList]="proccessTask"></app-list-card>
       </div>
@@ -59,7 +59,7 @@
         (drop)="dropHandler($event)"
         (dragover)="dragOverHandler($event)"
         (dragenter)="dragEnterHandler($event)"
-        (dragleave)="dragleaveHandler()"
+        (dragleave)="dragleaveHandler($event)"
       >
       <app-list-card [taskList]="pendingTask"></app-list-card>
     </div>
@@ -73,7 +73,7 @@
       (drop)="dropHandler($event)"
       (dragover)="dragOverHandler($event)"
       (dragenter)="dragEnterHandler($event)"
-      (dragleave)="dragleaveHandler()"
+      (dragleave)="dragleaveHandler($event)"
     >
       <app-list-card [taskList]="finalizeTask"></app-list-card>
     </div>
