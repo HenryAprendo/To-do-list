@@ -1,8 +1,32 @@
 
-<ul>
+<ul class="relative">
   <app-card
     *ngFor="let task of taskList"
     [task]="task"
+    (deleteEvent)="dialogBox($event)"
   >
   </app-card>
+
+  <div
+    class="absolute top-16 p-4 border rounded-md text-center bg-orange-700"
+    [ngClass]="dialog ? 'block' : 'hidden' "
+  >
+  <h2 class="text-2xl mb-2 text-sky-400 font-medium">¿Desea eliminar la tarea?</h2>
+  <p class="mb-2 text-base first-letter:uppercase text-slate-900 font-medium" *ngIf="taskDelete">{{taskDelete.title}}</p>
+  <button
+    class="px-2 py-1 mr-3 rounded text-lg font-semibold text-white hover:border hover:border-slate-300 active:text-blue-900"
+    (click)="delete()"
+  >
+    Continuar
+  </button>
+
+  <button
+    class="px-2 py-1 mr-3 rounded text-lg font-semibold text-white hover:border hover:border-slate-300 active:text-blue-900"
+    (click)="toggleDialog()"
+  >
+    Cancelar
+  </button>
+</div>
+
 </ul>
+

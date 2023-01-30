@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/app/model/task.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { Task } from 'src/app/model/task.model';
 export class CardComponent {
 
   @Input() task!:Task;
+  @Output() deleteEvent = new EventEmitter<Task>();
 
   dragStartHandler(e:DragEvent) {
     if(e.dataTransfer){
@@ -18,7 +19,10 @@ export class CardComponent {
   }
 
   dragEndHandler(e:DragEvent){
+  }
 
+  delete(){
+    this.deleteEvent.emit(this.task);
   }
 
 }
