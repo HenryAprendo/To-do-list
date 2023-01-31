@@ -1,17 +1,27 @@
 <header class="w-full py-2 px-2  bg-purple-500 ">
-  <h1 class="text-xl font-medium text-white">To do list</h1>
+  <h1 class="text-xl font-medium text-white md:text-2xl ">To do list</h1>
 </header>
 
 <main>
-  <section class="mb-10 mt-10">
-    <form class="flex flex-col items-center flex-wrap p-2 gap-3 md:flex-row  md:justify-center  m-auto" (submit)="addTask()">
-      <div class="max-w-md  w-full">
+  <section class="mb-3 mt-3">
+    <form class="flex flex-col items-center flex-wrap p-1 gap-3 md:flex-row md:justify-center md:items-start m-auto" (ngSubmit)="addTask()">
+      <div class="max-w-md w-full h-auto md:h-20 lg:h-24">
         <input
           type="text"
-          class="border w-full h-12 px-4 py-2 text-2xl text-teal-600 outline-0 shadow hover:shadow-lg md:flex-1"
+          class="border w-full h-12 px-4 py-2 text-2xl text-teal-600 outline-0 shadow hover:shadow-md md:flex-1"
           placeholder="new task"
+          required
           [formControl]="task"
+          [class.border-red-400]="fieldInvalid"
+          [class.border-sky-400]="fieldValid"
+
         >
+        <div class="opacity-0 transition-all ease-in duration-500" [ngClass]="fieldInvalid ? 'opacity-100': '' ">
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('required')">Este campo es requerido *</p>
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('maxlength')">Máximo 28 carácteres</p>
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('pattern')">Solo letras</p>
+        </div>
+
       </div>
       <button
         class="border max-w-md w-full h-12 bg-purple-600 hover:bg-purple-700 active:bg-purple-900 text-lg text-yellow-300 font-medium         rounded-md md:w-48"

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   finalizeTask: Task[] = [];
 
-  task = new FormControl('',[Validators.required, Validators.maxLength(28)]);
+  task = new FormControl('',[Validators.required, Validators.maxLength(28), Validators.pattern('[a-zA-Z ]*')]);
 
   showTask:string = '';
   zone:string = '';
@@ -65,11 +65,12 @@ export class AppComponent implements OnInit {
       }
 
       this.taskService.addTask(task);
-      this.task.setValue('');
+      // this.task.setValue('');
+      this.task.reset();
 
     }
     else {
-      this.task.markAllAsTouched;
+      this.task.markAllAsTouched();
     }
   }
 
