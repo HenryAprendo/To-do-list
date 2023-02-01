@@ -65,7 +65,6 @@ export class AppComponent implements OnInit {
       }
 
       this.taskService.addTask(task);
-      // this.task.setValue('');
       this.task.reset();
 
     }
@@ -132,16 +131,11 @@ export class AppComponent implements OnInit {
     }
 
     const el = e.target as HTMLElement;
-    console.log(e);
 
     if(el.localName === 'div' && el.dataset['zone']){
       this.zone = el.dataset['zone'];
     }
 
-  }
-
-  dragleaveHandler(e:DragEvent){
-    // console.log('leave');
   }
 
 }
