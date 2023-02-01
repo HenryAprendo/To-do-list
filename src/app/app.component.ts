@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   task = new FormControl('',[Validators.required, Validators.maxLength(28), Validators.pattern('[a-zA-Z ]*')]);
 
-  showTask:string = '';
+  // showTask:string = '';
   zone:string = '';
 
   constructor(
@@ -49,9 +49,6 @@ export class AppComponent implements OnInit {
       this.finalizeTask = data;
     });
 
-    this.task.valueChanges.subscribe( value => {
-      value ? this.showTask = value : this.showTask = '';
-    });
   }
 
   addTask(){

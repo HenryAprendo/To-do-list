@@ -17,9 +17,9 @@
 
         >
         <div class="opacity-0 transition-all ease-in duration-500" [ngClass]="fieldInvalid ? 'opacity-100': '' ">
-          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('required')">Este campo es requerido *</p>
-          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('maxlength')">Máximo 28 carácteres</p>
-          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('pattern')">Solo letras</p>
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('required')">This field is required *</p>
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('maxlength')">Maximum 28 characters</p>
+          <p class="text-xs md:text-sm text-red-400 italic" *ngIf="task.hasError('pattern')">Only letters</p>
         </div>
 
       </div>
